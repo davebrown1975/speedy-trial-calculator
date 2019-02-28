@@ -1,4 +1,4 @@
-import { React } from "react";
+import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   Container,
@@ -10,10 +10,13 @@ import {
   Item,
   Picker,
   Form,
-  DatePicker
+  DatePicker,
+  Grid,
+  Col,
+  Row
 } from "native-base";
 
-export default class App extends React.Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,10 +65,10 @@ export default class App extends React.Component {
       console.log(thirty);
 
       this.setState({
-        thirtyDays:thirty,
-        recaptureWindow:recapture,
-        speedyTrial:speedy
-      });      
+        thirtyDays: thirty,
+        recaptureWindow: recapture,
+        speedyTrial: speedy
+      });
     }
     console.log(this.state);
   }
@@ -101,22 +104,21 @@ export default class App extends React.Component {
       this.state.speedyTrial != undefined;
 
     console.log("show results = " + showResults);
-    const resultsArea = showResults ? (
-      <View>
-        <Text>
-          Recapture Window:{" "}
-          {this.state.recaptureWindow.toString().substr(4, 12)}
-        </Text>
-        <Text>
-          Thirty Day: {this.state.thirtyDays.toString().substr(4, 12)}
-        </Text>
-        <Text>
-          Speedy Trial Limit: {this.state.speedyTrial.toString().substr(4, 12)}
-        </Text>
-      </View>
-    ) : (
-      ""
-    );
+    // let resultsArea = showResults ? (
+    //   <View>
+    //     <Text>
+    //       Recapture Window: {this.state.recaptureWindow.toString().substr(4, 12)}
+    //     </Text>
+    //     <Text>
+    //       Thirty Day: {this.state.thirtyDays.toString().substr(4, 12)}
+    //     </Text>
+    //     <Text>
+    //       Speedy Trial Limit: {this.state.speedyTrial.toString().substr(4, 12)}
+    //     </Text>
+    //   </View>
+    // ) : (
+    //   ""
+    // );
 
     return (
       <Container>
@@ -135,6 +137,7 @@ export default class App extends React.Component {
                   style={{ width: undefined }}
                   placeholder="Select Trial Type"
                   placeholderStyle={{ color: "#bfc6ea" }}
+                  textStyle={{ color: "green" }}
                   placeholderIconColor="#007aff"
                   selectedValue={this.state.trialType}
                   onValueChange={this.onTrialTypeChange.bind(this)}
@@ -154,14 +157,50 @@ export default class App extends React.Component {
                 modalTransparent={false}
                 animationType={"fade"}
                 androidMode={"default"}
-                placeHolderText="Select date"
                 textStyle={{ color: "green" }}
                 placeHolderTextStyle={{ color: "#d3d3d3" }}
                 onDateChange={this.setArrestDate}
                 disabled={false}
               />
             </Item>
-            {showResults && resultsArea}
+            {showResults && (
+              <View style={styles.results}>
+                <Grid>
+                  <Row>
+                    <Col>
+                      <Text style={styles.bold}>Recapture Window: </Text>
+                    </Col>
+                    <Col>
+                      <Text style={styles.resultsText}>
+                        {this.state.recaptureWindow.toString().substr(4, 12)}
+                      </Text>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col>
+                      <Text style={styles.bold}>Thirty Day: </Text>
+                    </Col>
+                    <Col>
+                      <Text style={styles.resultsText}>
+                        {this.state.thirtyDays.toString().substr(4, 12)}
+                      </Text>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col>
+                      <Text style={styles.bold}>Speedy Trial Limit: </Text>
+                    </Col>
+                    <Col>
+                      <Text style={styles.resultsText}>
+                        {this.state.speedyTrial.toString().substr(4, 12)}
+                      </Text>
+                    </Col>
+                  </Row>
+                </Grid>
+              </View>
+            )}
           </Form>
           <Text>
             Thanks for using this utility app. Simply change the date and trial
@@ -189,5 +228,16 @@ const styles = StyleSheet.create({
   },
   footer: {
     margin: 25
+  },
+  resultsText: {
+    fontSize: 11,
+    color: "green"
+  },
+  bold: {
+    fontSize: 11,
+    fontWeight: "bold"
+  },
+  results: {
+    marginTop: 30
   }
 });
