@@ -2,7 +2,7 @@
   "expo": {
     "name": "Speedy Trial Calculator",
     "slug": "speedy-trial-calculator",
-    "privacy": "public",
+    "privacy": "unlisted",
     "sdkVersion": "32.0.0",
     "platforms": [
       "ios",
@@ -10,9 +10,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/ic_launcher.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/screenshot3.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,6 +24,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "In Florida, The Speedy Trial Rule, or Florida Rule of Criminal Procedure 3.191 states that once a person has been arrested, they must be brought to trial within:\n\n175 days of their arrest if charged with a felony; or\n90 days of their arrest if charged with a misdemeanour.\n\nThis calculator helps you quickly calculate such dates, simply update the fields below to modify the results of the speedy trial calculator."
   }
 }
